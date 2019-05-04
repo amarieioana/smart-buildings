@@ -1,0 +1,13 @@
+<h1>{{ building$.name }}</h1>
+
+<p><strong>Products:</strong></p>
+<ul>
+    <li *ngFor="let product of building$.products">
+        <p>{{ product.name }}</p>
+        <ul>
+            <li *ngFor="let consumption of product.consumptions">
+                <p>{{ consumption.floor }}</p>
+            </li>
+        </ul>
+    </li>
+</ul>

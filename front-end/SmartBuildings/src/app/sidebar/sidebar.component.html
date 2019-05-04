@@ -1,0 +1,19 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="" [class.activated]="currentUrl == '/'">
+        <i class="material-icons">home</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="add-building" [class.activated]="currentUrl == '/add-building'">
+        <i class="material-icons">add</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="notifications" [class.activated]="currentUrl == '/notifications'">
+        <i class="material-icons">message</i>
+      </a>
+    </li>
+  </ul>
+</nav>
