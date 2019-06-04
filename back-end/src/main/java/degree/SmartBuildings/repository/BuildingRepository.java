@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BuildingRepository extends MongoRepository<Building,String> {
+public interface BuildingRepository extends MongoRepository<Building, String> {
 
     Optional<Building> findById(String id);
+
     List<Building> findByActive(Boolean active);
 }

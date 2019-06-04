@@ -90,77 +90,54 @@ public class BuildingService {
         return dataFormatter.formatCellValue(cell);
     }
 
-    private void parseConsumptionFile(Workbook workbook,Building building) {
+    private void parseConsumptionFile(Workbook workbook, Building building) {
         Sheet sheet = workbook.getSheetAt(STARTSHEETROW);
         for (Row row : sheet) {
             if (row.getRowNum() == 0)
                 continue;
-            addConsumptionEntry(row,building);
+            addConsumptionEntry(row, building);
         }
     }
 
-    private void addConsumptionEntry(Row row,Building building) {
+    private void addConsumptionEntry(Row row, Building building) {
         String product = getCellContent(row, excelMap.get("PRODUCT"));
         String floor = getCellContent(row, excelMap.get("FLOOR"));
         List<Product> result = building.getProducts().stream()
                 .filter(item -> item.name.equals(product))
                 .collect(Collectors.toList());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime supplyDate = LocalDateTime.parse(getCellContent(row,excelMap.get("SUPPLYDATE")), formatter);
-        LocalDateTime endDate = LocalDateTime.parse(getCellContent(row,excelMap.get("ENDDATE")), formatter);
-        if(result.isEmpty())
-        {
-            Consumption newConsumption= new Consumption(Integer.parseInt(getCellContent(row,(excelMap.get("CONSUMEDQUANTITY")))),supplyDate, endDate);
-            List<Consumption> consumptions= new ArrayList<>();
+        LocalDateTime supplyDate = LocalDateTime.parse(getCellContent(row, excelMap.get("SUPPLYDATE")), formatter);
+        LocalDateTime endDate = LocalDateTime.parse(getCellContent(row, excelMap.get("ENDDATE")), formatter);
+        if (result.isEmpty()) {
+            Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+            List<Consumption> consumptions = new ArrayList<>();
             consumptions.add(newConsumption);
-            Floor newFloor= new Floor(floor,consumptions);
-            List<Floor> floors=new ArrayList<>();
+            Floor newFloor = new Floor(floor, consumptions);
+            List<Floor> floors = new ArrayList<>();
             floors.add(newFloor);
-            Product newProduct= new Product(product,floors);
+            Product newProduct = new Product(product, floors);
             building.getProducts().add(newProduct);
-        }
-        else
-        {
-            Product updatedProduct= result.get(0);
+        } else {
+            Product updatedProduct = result.get(0);
             List<Floor> floorResult = updatedProduct.getFloors().stream()
                     .filter(item -> item.floor.equals(floor))
                     .collect(Collectors.toList());
-            if(floorResult.isEmpty()){
-                Consumption newConsumption= new Consumption(Integer.parseInt(getCellContent(row,(excelMap.get("CONSUMEDQUANTITY")))),supplyDate, endDate);
-                List<Consumption> consumptions= new ArrayList<>();
+            if (floorResult.isEmpty()) {
+                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+                List<Consumption> consumptions = new ArrayList<>();
                 consumptions.add(newConsumption);
-                Floor newFloor= new Floor(floor,consumptions);
-                List<Product> allProducts= building.getProducts();
-                allProducts.stream().filter(item-> item.name.equals(product)).findFirst().get().getFloors().add(newFloor);
+                Floor newFloor = new Floor(floor, consumptions);
+                List<Product> allProducts = building.getProducts();
+                allProducts.stream().filter(item -> item.name.equals(product)).findFirst().get().getFloors().add(newFloor);
                 building.setProducts(allProducts);
-            }
-            else{
-                Consumption newConsumption= new Consumption(Integer.parseInt(getCellContent(row,(excelMap.get("CONSUMEDQUANTITY")))),supplyDate, endDate);
-                List<Floor> allFloors= building.getProducts().stream().filter(item-> item.name.equals(product)).findFirst().get().getFloors();
-                allFloors.stream().filter(item->item.floor.equals(floor)).findFirst().get().getConsumptions().add(newConsumption);
-                building.getProducts().stream().filter(item->item.name.equals(product)).findFirst().get().setFloors(allFloors);
+            } else {
+                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+                List<Floor> allFloors = building.getProducts().stream().filter(item -> item.name.equals(product)).findFirst().get().getFloors();
+                allFloors.stream().filter(item -> item.floor.equals(floor)).findFirst().get().getConsumptions().add(newConsumption);
+                building.getProducts().stream().filter(item -> item.name.equals(product)).findFirst().get().setFloors(allFloors);
             }
         }
         this.buildingRepository.save(building);
     }
 
-//    private Candidate addConsumption(Row row, Faculty faculty,Campaign campaign) {
-//        Candidate dbCandidate = candidateRepository.getByEmailAndCampaign(getCellContent(row, excelMap.get("EMAIL")),campaign);
-//
-//        if (dbCandidate == null) {
-//            dbCandidate = new Candidate();
-//            dbCandidate.setCampaign(campaign);
-//            dbCandidate.setFaculty(faculty);
-//            dbCandidate.setAlumniCandidate(Boolean.valueOf(getCellContent(row, excelMap.get("ALUMNI"))));
-//            dbCandidate.setInternalCandidate(Boolean.valueOf(getCellContent(row, excelMap.get("INTERNALCANDIDATE"))));
-//            dbCandidate.setEmail(getCellContent(row, excelMap.get("EMAIL")));
-//            dbCandidate.setPhone(getCellContent(row, excelMap.get("PHONE")));
-//            dbCandidate.setFirstName(getCellContent(row, excelMap.get("FIRSTNAME")));
-//            dbCandidate.setLastName(getCellContent(row, excelMap.get("LASTNAME")));
-//            dbCandidate.setStudyYear(Integer.parseInt(getCellContent(row, excelMap.get("STUDYYEAR"))));
-//            candidateRepository.add(dbCandidate);
-//        }
-//
-//        return dbCandidate;
-//    }
 }

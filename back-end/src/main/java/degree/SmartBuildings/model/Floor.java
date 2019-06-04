@@ -8,14 +8,20 @@ public class Floor {
     public String floor;
     private List<Consumption> consumptions;
 
-    protected Floor() { this.consumptions=new ArrayList<>(); }
-
-    public Floor(String floor, List<Consumption> consumptions){
-        this.floor=floor;
-        this.consumptions=consumptions;
+    protected Floor() {
+        this.consumptions = new ArrayList<>();
     }
 
-    public String getFloor() { return floor; }
+    public Floor(String floor, List<Consumption> consumptions) {
+        this.floor = floor;
+        this.consumptions = consumptions;
+    }
 
-    public List<Consumption> getConsumptions() { return consumptions; }
+    public String getFloor() {
+        return floor;
+    }
+
+    public List<Consumption> getConsumptions() {
+        return consumptions;
+    }
 }
