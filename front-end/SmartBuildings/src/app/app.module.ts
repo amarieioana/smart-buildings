@@ -10,6 +10,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { AddBuildingComponent } from './add-building/add-building.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ImportPopUpComponent } from './import-pop-up/import-pop-up.component';
+import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +21,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     BuildingsComponent,
     DetailsComponent,
     NotificationsComponent,
-    AddBuildingComponent
+    AddBuildingComponent,
+    ImportPopUpComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

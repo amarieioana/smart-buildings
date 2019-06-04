@@ -10,8 +10,13 @@ export class SidebarComponent implements OnInit {
 
   currentUrl: string;
 
-  constructor(private router : Router) { 
-    router.events.subscribe((_: NavigationEnd) => this.currentUrl = _.url)
+  constructor(private router: Router) {
+    this.router.events
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.currentUrl = event.url
+        }
+      });
   }
 
   ngOnInit() {

@@ -1,13 +1,30 @@
-<h1>{{ building$.name }}</h1>
-
-<p><strong>Products:</strong></p>
+<app-import-pop-up [errorMessage]="errorMessage" id="import-pop-up" *ngIf="wrongImport==true" (cancel)="onCancel()"></app-import-pop-up>
+<div class="grid-container">
+<div class="grid-item">
+    <h1><strong>Name: {{ building$.name }}</strong></h1>
+    <h2><strong>Address: {{ building$.address }}</strong></h2>
+    <h3><strong>Products:</strong></h3>
+</div>
+<div class="grid-item">
+    <label class="custom-file-upload" id="import-btn">
+        <i class="fas fa-file-import fa-2x"></i>
+        <input type="file" (change)="incomingfile($event)" accept=".xlsx" /><br>
+        Upload
+    </label>
+    <button class="delete-button" (click)="onDelete()">
+    <i class="fas fa-trash-alt fa-2x"></i>
+    </button>
+</div>
+</div>
 <ul>
     <li *ngFor="let product of building$.products">
         <p>{{ product.name }}</p>
         <ul>
-            <li *ngFor="let consumption of product.consumptions">
-                <p>{{ consumption.floor }}</p>
+            <li *ngFor="let floors of product.floors">
+                <p>{{ floors.floor }}</p>
             </li>
         </ul>
     </li>
 </ul>
+
+<app-download></app-download>

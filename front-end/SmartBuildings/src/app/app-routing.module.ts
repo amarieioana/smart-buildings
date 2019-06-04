@@ -6,26 +6,26 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { AddBuildingComponent } from './add-building/add-building.component'
 
 const routes: Routes = [
-    {
-        path: '',
-        component: BuildingsComponent
-      },
-      {
-        path: 'details/:id',
-        component: DetailsComponent
-      },
-      {
-        path: 'add-building',
-        component: AddBuildingComponent
-      },
-      {
-        path: 'notifications',
-        component: NotificationsComponent
-      },
+  {
+    path: '',
+    component: BuildingsComponent
+  },
+  {
+    path: 'details/:id',
+    component: DetailsComponent
+  },
+  {
+    path: 'add-building',
+    component: AddBuildingComponent
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

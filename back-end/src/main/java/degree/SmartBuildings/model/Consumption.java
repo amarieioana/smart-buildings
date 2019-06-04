@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 
 public class Consumption {
 
-     private String floor;
      private int consumedQuantity;
-     private LocalDateTime lastUpdate;
+     private LocalDateTime supplyDate;
+     private LocalDateTime endDate;
 
      protected Consumption() {
      }
 
-     public Consumption(String floor, int consumedQuantity, LocalDateTime lastUpdate) {
-         this.floor=floor;
+     public Consumption(int consumedQuantity, LocalDateTime supplyDate, LocalDateTime endDate) {
          this.consumedQuantity=consumedQuantity;
-         this.lastUpdate=lastUpdate;
+         this.supplyDate=supplyDate;
+         this.endDate=endDate;
      }
-
-     public String getFloor(){ return floor; }
 
      public int getConsumedQuantity() { return consumedQuantity; }
 
-     public LocalDateTime getLastUpdate() { return lastUpdate; }
+    public LocalDateTime getSupplyDate() { return supplyDate; }
+
+    public LocalDateTime getEndDate() { return endDate; }
 }

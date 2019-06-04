@@ -1,29 +1,30 @@
 package degree.SmartBuildings.model;
 
-import org.springframework.data.annotation.Id;
-
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Product {
-    @Id
-    private String id;
-    private String name;
-    private List<Consumption> consumptions;
+    public String name;
+    private List<Floor> floors;
 
-    protected Product(){this.consumptions = new ArrayList<>();}
-
-    public Product(String name, List<Consumption> consumptions){
-        this.name=name;
-        this.consumptions = consumptions;
+    protected Product() {
+        this.floors = new ArrayList<>();
     }
 
-    public String getId(){
-        return id;
+    public Product(String name, List<Floor> floors) {
+        this.name = name;
+        this.floors = floors;
     }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
-    public List<Consumption> getConsumptions() { return consumptions;}
+    public List<Floor> getFloors() {
+        return floors;
+    }
+
+    public void setFloors(List<Floor> floors) {
+        this.floors = floors;
+    }
 }
