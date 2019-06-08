@@ -39,6 +39,7 @@ public class BuildingController {
 
     @GetMapping("buildings/all")
     public List<Building> getAll() throws IOException {
+        mlService.exportMongoDbToCSV();
         List<Building> buildings = this.buildingRepository.findByActive(true);
 
         return buildings;

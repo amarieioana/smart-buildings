@@ -22,7 +22,7 @@ public class MLService {
 
     public void exportMongoDbToCSV() throws IOException {
         try {
-            FileWriter csvWriter = new FileWriter("data.csv");
+            FileWriter csvWriter = new FileWriter("../BuildingConsumptionPrediction/data/consumption.csv");
             csvWriter.append("BuildingId");
             csvWriter.append(",");
             csvWriter.append("Product");
