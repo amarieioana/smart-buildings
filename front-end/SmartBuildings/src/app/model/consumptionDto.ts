@@ -5,6 +5,5 @@ export class ConsumptionDto{
     floor: string;
     consumedQuantity: number;
     supplyDate: string;
-    endDate: string;
    
 }

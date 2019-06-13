@@ -6,27 +6,26 @@ import degree.SmartBuildings.model.Floor;
 import degree.SmartBuildings.model.Product;
 import degree.SmartBuildings.repository.BuildingRepository;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-
-import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 import static org.apache.poi.ss.usermodel.Row.MissingCellPolicy.CREATE_NULL_AS_BLANK;
 
-@Component
+@Service
 public class BuildingService {
 
     @Autowired
@@ -55,7 +54,6 @@ public class BuildingService {
         excelMap.put("FLOOR", 1);
         excelMap.put("CONSUMEDQUANTITY", 2);
         excelMap.put("SUPPLYDATE", 3);
-        excelMap.put("ENDDATE", 4);
     }
 
     private String validateConsumptionFile(Workbook workbook) {
@@ -107,9 +105,8 @@ public class BuildingService {
                 .collect(Collectors.toList());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime supplyDate = LocalDateTime.parse(getCellContent(row, excelMap.get("SUPPLYDATE")), formatter);
-        LocalDateTime endDate = LocalDateTime.parse(getCellContent(row, excelMap.get("ENDDATE")), formatter);
         if (result.isEmpty()) {
-            Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+            Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate);
             List<Consumption> consumptions = new ArrayList<>();
             consumptions.add(newConsumption);
             Floor newFloor = new Floor(floor, consumptions);
@@ -123,7 +120,7 @@ public class BuildingService {
                     .filter(item -> item.floor.equals(floor))
                     .collect(Collectors.toList());
             if (floorResult.isEmpty()) {
-                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate);
                 List<Consumption> consumptions = new ArrayList<>();
                 consumptions.add(newConsumption);
                 Floor newFloor = new Floor(floor, consumptions);
@@ -131,7 +128,7 @@ public class BuildingService {
                 allProducts.stream().filter(item -> item.name.equals(product)).findFirst().get().getFloors().add(newFloor);
                 building.setProducts(allProducts);
             } else {
-                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate, endDate);
+                Consumption newConsumption = new Consumption(Integer.parseInt(getCellContent(row, (excelMap.get("CONSUMEDQUANTITY")))), supplyDate);
                 List<Floor> allFloors = building.getProducts().stream().filter(item -> item.name.equals(product)).findFirst().get().getFloors();
                 allFloors.stream().filter(item -> item.floor.equals(floor)).findFirst().get().getConsumptions().add(newConsumption);
                 building.getProducts().stream().filter(item -> item.name.equals(product)).findFirst().get().setFloors(allFloors);

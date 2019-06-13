@@ -1,11 +1,30 @@
-#container {
-  margin-top: 5%;
-  margin-left: 32%;
+// #container {
+//   margin-top: 5%;
+//   margin-left: 32%;
 
-  .li {
-    margin-right: 65%;
-  }
-}
+//   .li {
+//     margin-right: 65%;
+//     font-size: 18px !important;
+//   }
+// }
 h1 strong{
   color: white;
+}
+
+.fa-search{
+  color: white;
+}
+
+.i-wrapper{
+  display: inline;
+  background-color: rgb(179, 178, 178);
+  padding: 5px;
+}
+
+.search-bar{
+  margin-bottom: 2%;
+}
+
+.search-bar input{
+  width: 16.5%;
 }

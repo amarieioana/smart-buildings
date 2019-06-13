@@ -66,4 +66,8 @@ export class DataService {
        });
   }
 
+  getNotifications(){
+    return this.http.get('http://localhost:8080/algorithm',{responseType: 'text'})
+  }
+
 }

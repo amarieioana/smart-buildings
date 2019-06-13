@@ -6,6 +6,11 @@ body {
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   color:black;
+  background-image: url("buildings3.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 #container {
@@ -22,14 +27,15 @@ body {
       padding: 0;
 
       li {
-        background: rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.8);
         border-radius: 8px;
         padding: 20px;
         margin-bottom: 8px;
         font-weight: bold;
+        font-size: 18px;
 
         a {
-          font-size: 1.5em;
+          font-size: 1.2em;
           text-decoration: none;
           font-weight: bold;
           color: black;

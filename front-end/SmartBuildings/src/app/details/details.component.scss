@@ -1,7 +1,13 @@
-
 .grid-container{
     display:grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 80% 20%;
+}
+.small-grid-container{
+    display:grid;
+    grid-template-columns: 33% auto 33%;
+}
+
+.small-grid-item{
 }
 
 input[type="file"] {
@@ -9,10 +15,13 @@ input[type="file"] {
 }
 
 .custom-file-upload {
-    cursor: pointer;
     padding: 20px;
     display: block;
     
+}
+
+.custom-icon{
+    padding: 20px;
 }
 
 .delete-button{
@@ -20,6 +29,13 @@ input[type="file"] {
     border: 0px;
     margin-left: 5%;
 }
+
+.example-button{
+    background: transparent;
+    border: 0px;
+    margin-left: 5%;
+}
+
 h1 strong{
     color: white;
 }
@@ -28,4 +44,23 @@ h2 strong{
 }
 h3 strong{
     color: white;
+}
+
+.fa-file-import{
+    color:white !important;
+}
+
+.fa-trash-alt{
+    color:white !important;
+}
+
+.fa-2x{
+    color:white !important;
+}
+i{
+    cursor: pointer;
+}
+
+label{
+    color: rgb(214, 216, 216);
 }

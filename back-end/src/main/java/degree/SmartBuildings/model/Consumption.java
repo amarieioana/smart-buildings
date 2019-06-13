@@ -6,15 +6,13 @@ public class Consumption {
 
     private int consumedQuantity;
     private LocalDateTime supplyDate;
-    private LocalDateTime endDate;
 
     protected Consumption() {
     }
 
-    public Consumption(int consumedQuantity, LocalDateTime supplyDate, LocalDateTime endDate) {
+    public Consumption(int consumedQuantity, LocalDateTime supplyDate) {
         this.consumedQuantity = consumedQuantity;
         this.supplyDate = supplyDate;
-        this.endDate = endDate;
     }
 
     public int getConsumedQuantity() {
@@ -25,7 +23,4 @@ public class Consumption {
         return supplyDate;
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
 }

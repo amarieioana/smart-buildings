@@ -7,8 +7,9 @@ import java.io.File;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class FileService {
 
 

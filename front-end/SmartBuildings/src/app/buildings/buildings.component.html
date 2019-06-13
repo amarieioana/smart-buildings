@@ -2,6 +2,8 @@
 
 <ul>
   <li *ngFor="let building of buildings$">
+    <i class="far fa-building"></i>
+
     <a routerLink="/details/{{building.id}}">{{ building.name }}</a>
   </li>
 </ul>

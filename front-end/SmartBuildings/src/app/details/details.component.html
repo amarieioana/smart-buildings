@@ -6,14 +6,34 @@
     <h3><strong>Products:</strong></h3>
 </div>
 <div class="grid-item">
+    <div class="small-grid-container">
+        <div class="small-grid-item">
     <label class="custom-file-upload" id="import-btn">
         <i class="fas fa-file-import fa-2x"></i>
         <input type="file" (change)="incomingfile($event)" accept=".xlsx" /><br>
-        Upload
+        Upload <br> Data
     </label>
+        </div>
+    
+        <div class="small-grid-item">
+    <label class="custom-icon">
     <button class="delete-button" (click)="onDelete()">
     <i class="fas fa-trash-alt fa-2x"></i>
     </button>
+    Delete <br> Building
+    </label>
+        </div>
+
+        <div class="small-grid-item">
+            <label class="custom-icon">
+                
+                <button class="example-button" (click)="fct()">
+                    <i class="fas fa-download fa-2x"></i>
+                </button>
+                Get <br>Example
+            </label>
+        </div>
+</div>
 </div>
 </div>
 <ul>

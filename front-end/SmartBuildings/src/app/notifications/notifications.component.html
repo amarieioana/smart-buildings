@@ -1,8 +1,10 @@
-<div class="container">
 <h1><strong> Notifications</strong></h1>
-<ul>
-  <li>
-    gvsdgvd
+<div class="search-bar">
+<input type="text" id="myInput" (keyup)="myFunction($event)" placeholder="Search..." title="">
+<div class="i-wrapper"><i class="fa fa-search"></i></div>
+</div>
+<ul id="myUL">
+  <li *ngFor="let notification of notifications$">
+    In {{ notification }}
   </li>
 </ul>
-</div>
