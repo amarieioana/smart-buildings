@@ -3,6 +3,8 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ImportPopUpComponent } from '../import-pop-up/import-pop-up.component';
+import * as fileSaver from 'file-saver';
+import {ExcelService} from './../service/excel.service';
 
 @Component({
   selector: 'app-details',
@@ -19,7 +21,26 @@ export class DetailsComponent implements OnInit {
   wrongImport: any;
   errorMessage: any = "";
 
-  constructor(private data: DataService, private route: ActivatedRoute) {
+  dataConsumptions: any = [{
+    Product: 'sugar',
+    Floor: '1',
+    ConsumedQuantity: 3,
+    SupplyDate: '2019-06-13 12:30'
+  },
+  {
+    Product: 'tea',
+    Floor: '2',
+    ConsumedQuantity: 2,
+    SupplyDate: '2019-06-12 09:30'
+  },
+  {
+    Product: 'milk',
+    Floor: '1',
+    ConsumedQuantity: 4,
+    SupplyDate: '2019-06-01 10:30'
+  }];
+
+  constructor(private data: DataService, private route: ActivatedRoute, private excelService: ExcelService) {
     this.route.params.subscribe( params => this.building$ = params.id );
    }
 
@@ -56,6 +77,10 @@ export class DetailsComponent implements OnInit {
   onCancel() {
     let popUp = document.getElementById("import-pop-up");
     popUp.classList.add("hidden");
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.dataConsumptions, 'model-upload-consumptions');
   }
 
 }

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DownloadService } from './download.service';
+import { ExcelService } from './excel.service';
 
-describe('DownloadService', () => {
+describe('ExcelService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DownloadService = TestBed.get(DownloadService);
+    const service: ExcelService = TestBed.get(ExcelService);
     expect(service).toBeTruthy();
   });
 });

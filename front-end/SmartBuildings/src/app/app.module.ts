@@ -12,7 +12,6 @@ import { AddBuildingComponent } from './add-building/add-building.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ImportPopUpComponent } from './import-pop-up/import-pop-up.component';
-import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { DownloadComponent } from './download/download.component';
     DetailsComponent,
     NotificationsComponent,
     AddBuildingComponent,
-    ImportPopUpComponent,
-    DownloadComponent
+    ImportPopUpComponent
   ],
   imports: [
     BrowserModule,
