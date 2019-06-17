@@ -38,10 +38,18 @@
 </div>
 <ul>
     <li *ngFor="let product of building$.products">
-        <p>{{ product.name }}</p>
+            <i class="fas fa-star"></i>   {{ product.name | uppercase }}
         <ul>
-            <li *ngFor="let floors of product.floors">
-                <p>{{ floors.floor }}</p>
+            Floors:
+            <li  class="floor-class" *ngFor="let floors of product.floors ; let isLast=last">
+                <p *ngIf="endsWith(floors.floor,'1')">
+                   {{ floors.floor }}st{{isLast ? '.' : ', '}} </p>
+                <p *ngIf="endsWith(floors.floor,'2')">
+                    {{ floors.floor }}nd{{isLast ? '.' : ', '}} </p>
+                <p *ngIf="endsWith(floors.floor,'3')">
+                    {{ floors.floor }}rd{{isLast ? '.' : ', '}} </p>
+                <p *ngIf="!isIgnoreFloor(floors)">{{ floors.floor }}th{{isLast ? '.' : ', '}}</p>    
+                <!-- <p>{{ floors.floor }}{{isLast ? '.' : ', '}}</p>     -->
             </li>
         </ul>
     </li>

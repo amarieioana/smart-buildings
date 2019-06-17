@@ -83,4 +83,11 @@ export class DetailsComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.dataConsumptions, 'model-upload-consumptions');
   }
 
+  isIgnoreFloor(item: any): boolean {
+    return this.endsWith(item.floor,'1') || this.endsWith(item.floor,'2') || this.endsWith(item.floor,'3');
+  } 
+
+  endsWith(item: string, end: string): boolean {
+    return item.endsWith(end);
+  } 
 }
