@@ -94,6 +94,8 @@ export class DetailsComponent implements OnInit {
   onCancelPrediction() {
     let popUp = document.getElementById("prediction-pop-up");
     popUp.classList.add("hidden");
+    this.data.setShowPrediction(false);
+    this.data.setSinglePredictionMessage("");
   }
 
   exportAsXLSX():void {

@@ -1,50 +1,85 @@
 <app-import-pop-up [errorMessage]="errorMessage" id="import-pop-up" *ngIf="wrongImport==true" (cancel)="onCancel()"></app-import-pop-up>
-<app-prediction-pop-up [singlePredictionMessage]="singlePredictionMessage" id="prediction-pop-up" *ngIf="showPrediction==true" (cancel)="onCancelPrediction()"></app-prediction-pop-up>
+<app-prediction-pop-up [singlePredictionMessage]="singlePredictionMessage" id="prediction-pop-up" *ngIf="showPrediction==true"
+    (cancel)="onCancelPrediction()"></app-prediction-pop-up>
 
 <div class="grid-container">
-<div class="grid-item">
-    <h1><strong>Name: {{ building$.name }}</strong></h1>
-    <h2><strong>Address: {{ building$.address }}</strong></h2>
-    <h3><strong>Products:</strong></h3>
-</div>
-<div class="grid-item">
-    <div class="small-grid-container">
-        <div class="small-grid-item">
-    <label class="custom-file-upload" id="import-btn">
-        <i class="fas fa-file-import fa-2x"></i>
-        <input type="file" (change)="incomingfile($event)" accept=".xlsx" /><br>
-        Upload <br> Data
-    </label>
-        </div>
-    
-        <div class="small-grid-item">
-    <label class="custom-icon">
-    <button class="delete-button" (click)="onDelete()">
-    <i class="fas fa-trash-alt fa-2x"></i>
-    </button>
-    Delete <br> Building
-    </label>
-        </div>
+    <div class="grid-item">
+        <h1>
+            <strong>Name: {{ building$.name }}</strong>
+        </h1>
+        <h2>
+            <strong>Address: {{ building$.address }}</strong>
+        </h2>
+        <h3>
+            <strong>Products:</strong>
+        </h3>
+    </div>
+    <div class="grid-item">
+        <div class="small-grid-container">
+            <div class="small-grid-item">
+                <label class="custom-file-upload" id="import-btn">
+                    <i class="fas fa-file-import fa-2x"></i>
+                    <input type="file" (change)="incomingfile($event)" accept=".xlsx" />
+                    <br> Upload
+                    <br> Data
+                </label>
+            </div>
 
-        <div class="small-grid-item">
-            <label class="custom-icon">
-                
-                <button class="example-button" (click)="exportAsXLSX()">
-                    <i class="fas fa-download fa-2x"></i>
-                </button>
-                Get <br>Example
-            </label>
+            <div class="small-grid-item">
+                <label class="custom-icon">
+                    <button class="delete-button" (click)="onDelete()">
+                        <i class="fas fa-trash-alt fa-2x"></i>
+                    </button>
+                    Delete
+                    <br> Building
+                </label>
+            </div>
+
+            <div class="small-grid-item">
+                <label class="custom-example-icon">
+
+                    <button class="example-button" (click)="exportAsXLSX()">
+                        <i class="fas fa-download fa-2x"></i>
+                    </button>
+                    Get
+                    <br>Example
+                </label>
+            </div>
         </div>
-</div>
-</div>
+    </div>
 </div>
 <ul>
     <li *ngFor="let product of building$.products">
-            <i class="fas fa-star"></i>   {{ product.name | uppercase }}
+        <ng-container *ngIf="product.name.includes('sugar');else second">
+            <i class="fas fa-cubes"></i> {{ product.name | uppercase }}
+        </ng-container>
+        <ng-template #second>
+            <ng-container *ngIf="product.name.includes('coffee');else third">
+                <i class="fas fa-coffee"></i> {{ product.name | uppercase }}
+            </ng-container>
+        </ng-template>
+        <ng-template #third>
+            <ng-container *ngIf="product.name.includes('tea');else fourth">
+                <i class="fas fa-mug-hot"></i> {{ product.name | uppercase }}
+            </ng-container>
+        </ng-template>
+        <ng-template #fourth>
+            <ng-container *ngIf="product.name.includes('honey');else fifth">
+                <i class="fab fa-forumbee"></i> {{ product.name | uppercase }}
+            </ng-container>
+        </ng-template>
+        <ng-template #fifth>
+            <ng-container *ngIf="product.name.includes('milk');else sixth">
+                <i class="fas fa-glass-whiskey"></i> {{ product.name | uppercase }}
+            </ng-container>
+        </ng-template>
+        <ng-template #sixth>
+            <i class="fas fa-star"></i> {{ product.name | uppercase }}
+        </ng-template>
         <ul>
             Floors:
-            <li  class="floor-class" *ngFor="let floors of product.floors ; let isLast=last">
-                
+            <li class="floor-class" *ngFor="let floors of product.floors ; let isLast=last">
+
                 <p *ngIf="endsWith(floors.floor,'1')">
                     <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}st</button>{{isLast ? '.' : ', '}}</p>
                 <p *ngIf="endsWith(floors.floor,'2')">
@@ -52,7 +87,7 @@
                 <p *ngIf="endsWith(floors.floor,'3')">
                     <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}rd</button>{{isLast ? '.' : ', '}} </p>
                 <p *ngIf="!isIgnoreFloor(floors)">
-                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}th</button>{{isLast ? '.' : ', '}}</p>    
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}th</button>{{isLast ? '.' : ', '}}</p>
                 <!-- <p>{{ floors.floor }}{{isLast ? '.' : ', '}}</p>     -->
             </li>
         </ul>

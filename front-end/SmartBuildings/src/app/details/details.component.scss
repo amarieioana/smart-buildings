@@ -1,10 +1,13 @@
 .grid-container{
     display:grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 80% 19% 1%;
 }
 .small-grid-container{
     display:grid;
-    grid-template-columns: 33% auto 33%;
+    grid-template-columns: 33% 33% 33%;
+    border-radius: 8px;
+    background: #2d2e2e;
+    opacity: 0.8;
 }
 
 .small-grid-item{
@@ -17,11 +20,18 @@ input[type="file"] {
 .custom-file-upload {
     padding: 20px;
     display: block;
+    text-shadow: 2px 2px 4px #000000;
     
 }
 
 .custom-icon{
     padding: 20px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.custom-example-icon{
+    padding: 20px;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .delete-button{
@@ -38,12 +48,15 @@ input[type="file"] {
 
 h1 strong{
     color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
 h2 strong{
     color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
 h3 strong{
     color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .fa-file-import{
