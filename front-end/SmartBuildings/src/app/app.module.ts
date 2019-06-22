@@ -12,6 +12,7 @@ import { AddBuildingComponent } from './add-building/add-building.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ImportPopUpComponent } from './import-pop-up/import-pop-up.component';
+import { PredictionPopUpComponent } from './prediction-pop-up/prediction-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ImportPopUpComponent } from './import-pop-up/import-pop-up.component';
     DetailsComponent,
     NotificationsComponent,
     AddBuildingComponent,
-    ImportPopUpComponent
+    ImportPopUpComponent,
+    PredictionPopUpComponent
   ],
   imports: [
     BrowserModule,

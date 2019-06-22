@@ -99,6 +99,40 @@ public class MLService {
         }
     }
 
+    public void exportSingleRow(String buildingId, String product, String floor){
+        try {
+            FileWriter csvWriter = new FileWriter("../NetApi/NetApi/data/singlePrediction.csv");
+            csvWriter.append("BuildingId");
+            csvWriter.append(",");
+            csvWriter.append("Product");
+            csvWriter.append(",");
+            csvWriter.append("Floor");
+            csvWriter.append(",");
+            csvWriter.append("ConsumedQuantity");
+            csvWriter.append(",");
+            csvWriter.append("SupplyDate");
+            csvWriter.append("\n");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            csvWriter.append(buildingId);
+            csvWriter.append(",");
+            csvWriter.append(product);
+            csvWriter.append(",");
+            csvWriter.append(floor);
+            csvWriter.append(",");
+            csvWriter.append(String.valueOf(0));
+            csvWriter.append(",");
+            LocalDateTime now = LocalDateTime.now();
+            csvWriter.append(formatter.format(now));
+            csvWriter.append("\n");
+
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getPredictions(String predictions) {
 
         String[] predictionsArray=predictions.split("@");
@@ -137,6 +171,22 @@ public class MLService {
             RestTemplate restTemplate = new RestTemplate();
             String predictions=restTemplate.getForObject(uri, String.class);
             return getPredictions(predictions);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getSinglePrediction(String buildingId, String product, String floor){
+        try {
+            exportMongoDbToCSV();
+            exportSingleRow(buildingId,product,floor);
+            final String uri = "http://localhost:52199/singlePrediction";
+            RestTemplate restTemplate = new RestTemplate();
+            String singlePrediction=restTemplate.getForObject(uri, String.class);
+            String[] predictionArray=singlePrediction.split("@");
+            String message = "In " + buildingRepository.findById(predictionArray[0]).get().getName() + predictionArray[1];
+            return message;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -1,4 +1,6 @@
 <app-import-pop-up [errorMessage]="errorMessage" id="import-pop-up" *ngIf="wrongImport==true" (cancel)="onCancel()"></app-import-pop-up>
+<app-prediction-pop-up [singlePredictionMessage]="singlePredictionMessage" id="prediction-pop-up" *ngIf="showPrediction==true" (cancel)="onCancelPrediction()"></app-prediction-pop-up>
+
 <div class="grid-container">
 <div class="grid-item">
     <h1><strong>Name: {{ building$.name }}</strong></h1>
@@ -42,13 +44,15 @@
         <ul>
             Floors:
             <li  class="floor-class" *ngFor="let floors of product.floors ; let isLast=last">
+                
                 <p *ngIf="endsWith(floors.floor,'1')">
-                   {{ floors.floor }}st{{isLast ? '.' : ', '}} </p>
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}st</button>{{isLast ? '.' : ', '}}</p>
                 <p *ngIf="endsWith(floors.floor,'2')">
-                    {{ floors.floor }}nd{{isLast ? '.' : ', '}} </p>
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}nd</button>{{isLast ? '.' : ', '}} </p>
                 <p *ngIf="endsWith(floors.floor,'3')">
-                    {{ floors.floor }}rd{{isLast ? '.' : ', '}} </p>
-                <p *ngIf="!isIgnoreFloor(floors)">{{ floors.floor }}th{{isLast ? '.' : ', '}}</p>    
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}rd</button>{{isLast ? '.' : ', '}} </p>
+                <p *ngIf="!isIgnoreFloor(floors)">
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}th</button>{{isLast ? '.' : ', '}}</p>    
                 <!-- <p>{{ floors.floor }}{{isLast ? '.' : ', '}}</p>     -->
             </li>
         </ul>

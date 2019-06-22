@@ -6,14 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NetApi.Controllers
 {
-    [Route("algorithm")]
+    
     public class BuildingsController : Controller
     {
 
+        [Route("algorithm")]
         [HttpGet]
         public string startAlgoritm()
         {
             return NetApiML.ConsoleApp.Program.MLAlgorithm();
+        }
+
+        [Route("singlePrediction")]
+        [HttpGet]
+        public string getSinglePrediction()
+        {
+            return NetApiML.ConsoleApp.Program.getSinglePrediction();
         }
 
         /*// GET api/values

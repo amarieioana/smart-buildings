@@ -1,0 +1,100 @@
+.button {
+    border-radius: 5px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    margin-right: 2rem;
+    color: #ffffff;
+}
+
+.edit-button {
+  background-color: #505c62;
+}
+
+.delete-button {
+    background-color: #e94c20;
+}
+
+.upload-text{
+  font-family: Roboto, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #252424;
+  padding-top: 5rem;
+  padding-left: 5%;
+}
+
+.buttons {
+    display: flex;
+    float: right;
+    margin-bottom: 3rem;
+    margin-top: 5rem;
+}
+
+.pop-up {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    width: 50%;
+    background-color: white;
+    z-index: 3;
+}
+
+.pop-up-wrapper::after {
+    content: '';
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.response-text {
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #a4a4a4;
+    margin-left: 5%;
+    padding-bottom: 20px;
+}
+
+.close-button-container{
+    float: right;
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.title-container{
+    float: left;
+    color: #252424;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-left: 5%;
+}
+
+.close-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background-color: transparent;
+}

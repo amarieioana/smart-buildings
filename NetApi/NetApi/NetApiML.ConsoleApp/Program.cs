@@ -21,8 +21,23 @@ namespace NetApiML.ConsoleApp
         //Dataset to use for predictions 
         private const string DATA_FILEPATH = @"E:\smart-buildings\NetApi\NetApi\data\consumption.csv";
         private const string TEST_FILEPATH = @"E:\smart-buildings\NetApi\NetApi\data\prediction.csv";
+        private const string SINGLE_FILEPATH = @"E:\smart-buildings\NetApi\NetApi\data\singlePrediction.csv";
 
         public static String MLAlgorithm()
+        {
+            MLContext mlContext = new MLContext();
+
+            // Training code used by ML.NET CLI and AutoML to generate the model
+            ModelBuilder.CreateModel();
+
+            ITransformer mlModel = mlContext.Model.Load(GetAbsolutePath(MODEL_FILEPATH), out DataViewSchema inputSchema);
+            var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+
+            String message = makePredictions(mlContext, TEST_FILEPATH, predEngine);
+            return message;
+        }
+
+        public static String getSinglePrediction()
         {
             MLContext mlContext = new MLContext();
 
@@ -32,7 +47,14 @@ namespace NetApiML.ConsoleApp
             ITransformer mlModel = mlContext.Model.Load(GetAbsolutePath(MODEL_FILEPATH), out DataViewSchema inputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 
-            String message = makePredictions(mlContext, TEST_FILEPATH, predEngine);
+            // Create sample data to do a single prediction with it 
+            ModelInput sampleData = CreateSingleDataSample(mlContext, SINGLE_FILEPATH);
+
+            // Try a single prediction
+            ModelOutput predictionResult = predEngine.Predict(sampleData);
+
+            String message = sampleData.BuildingId + "@ building, at the " + sampleData.Floor + " floor, " + predictionResult.Prediction +
+                " packs of " + sampleData.Product + " are needed.";
             return message;
         }
 

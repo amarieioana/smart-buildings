@@ -20,6 +20,9 @@ export class DetailsComponent implements OnInit {
   excelToStringContent: any;
   wrongImport: any;
   errorMessage: any = "";
+  singlePredictionMessage: any="";
+  showPrediction: any;
+
 
   dataConsumptions: any = [{
     Product: 'sugar',
@@ -63,6 +66,14 @@ export class DetailsComponent implements OnInit {
     this.data.errorMessage.subscribe(errorMessage => this.errorMessage = errorMessage);
   }
 
+  getSinglePredictionMessage() {
+    this.data.singlePredictionMessage.subscribe(singlePredictionMessage => this.singlePredictionMessage = singlePredictionMessage);
+  }
+
+  getShowPrediction() {
+    this.data.showPrediction.subscribe(showPrediction => this.showPrediction = showPrediction);
+  }
+
   incomingfile(event) {
     this.file = event.target.files[0];
     let reader = new FileReader();
@@ -77,6 +88,12 @@ export class DetailsComponent implements OnInit {
   onCancel() {
     let popUp = document.getElementById("import-pop-up");
     popUp.classList.add("hidden");
+    window.location.reload();
+  }
+
+  onCancelPrediction() {
+    let popUp = document.getElementById("prediction-pop-up");
+    popUp.classList.add("hidden");
   }
 
   exportAsXLSX():void {
@@ -90,4 +107,15 @@ export class DetailsComponent implements OnInit {
   endsWith(item: string, end: string): boolean {
     return item.endsWith(end);
   } 
+
+  singlePrediction(buildingId: any, product: any, floor: any){
+    let popUp = document.getElementById("prediction-pop-up");
+    if (popUp)
+    {
+      popUp.classList.remove("hidden");
+    }
+    this.data.postPrediction(buildingId,product,floor);
+    this.getSinglePredictionMessage();
+    this.getShowPrediction();
+  }
 }

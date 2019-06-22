@@ -17,7 +17,7 @@ namespace NetApiML.ConsoleApp
     public static class ModelBuilder
     {
         private static string TRAIN_DATA_FILEPATH = @"E:\smart-buildings\NetApi\NetApi\data\consumption.csv";
-        private static string MODEL_FILEPATH = @"../../../../NetApiML.Model/MLModel.zip";
+        private static string MODEL_FILEPATH = @"../../../../NetApi/NetApiML.Model/MLModel.zip";
 
         // Create MLContext to be shared across the model creation workflow objects 
         // Set a random seed for repeatable/deterministic results across multiple trainings.

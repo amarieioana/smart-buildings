@@ -14,6 +14,12 @@ export class DataService {
   private errorMessageSource; 
   errorMessage:any;
 
+  private showPredictionSource;
+  showPrediction: any;
+
+  private singlePredictionMessageSource;
+  singlePredictionMessage: any;
+
 
   constructor(private http: HttpClient,private router: Router) { 
     let defValue=false;
@@ -23,6 +29,14 @@ export class DataService {
     let defError=null;
     this.errorMessageSource = new BehaviorSubject(defError);
     this.errorMessage = this.errorMessageSource.asObservable();
+
+    let defPredictionDisplay=false;
+    this.showPredictionSource = new BehaviorSubject(defPredictionDisplay);
+    this.showPrediction = this.showPredictionSource.asObservable();
+
+    let defPrediction=null;
+    this.singlePredictionMessageSource = new BehaviorSubject(defPrediction);
+    this.singlePredictionMessage = this.singlePredictionMessageSource.asObservable();
   }
 
 
@@ -33,6 +47,14 @@ export class DataService {
   
   setErrorMessage(message){
     this.errorMessageSource.next(message);
+  }
+
+  setShowPrediction(status){
+    this.showPredictionSource.next(status);
+  }
+
+  setSinglePredictionMessage(message){
+    this.singlePredictionMessageSource.next(message);
   }
 
   getBuildings(){
@@ -68,6 +90,10 @@ export class DataService {
 
   getNotifications(){
     return this.http.get('http://localhost:8080/algorithm',{responseType: 'text'})
+  }
+
+  postPrediction(buildingId,product,floor){
+    return this.http.post('http://localhost:8080/singlePrediction',{buildingId: buildingId, product: product,floor: floor},{responseType: 'text'}).subscribe((response) => {this.setShowPrediction(true); this.setSinglePredictionMessage(response);});
   }
 
 }
