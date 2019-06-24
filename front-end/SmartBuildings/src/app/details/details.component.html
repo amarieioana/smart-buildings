@@ -78,17 +78,16 @@
         </ng-template>
         <ul>
             Floors:
-            <li class="floor-class" *ngFor="let floors of product.floors ; let isLast=last">
+            <li class="floor-class" *ngFor="let floors of product.floors">
 
                 <p *ngIf="endsWith(floors.floor,'1')">
-                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}st</button>{{isLast ? '.' : ', '}}</p>
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}st</button></p>
                 <p *ngIf="endsWith(floors.floor,'2')">
-                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}nd</button>{{isLast ? '.' : ', '}} </p>
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}nd</button></p>
                 <p *ngIf="endsWith(floors.floor,'3')">
-                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}rd</button>{{isLast ? '.' : ', '}} </p>
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}rd</button></p>
                 <p *ngIf="!isIgnoreFloor(floors)">
-                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}th</button>{{isLast ? '.' : ', '}}</p>
-                <!-- <p>{{ floors.floor }}{{isLast ? '.' : ', '}}</p>     -->
+                    <button class="floor-button" (click)="singlePrediction(building$.id, product.name, floors.floor)">{{ floors.floor }}th</button></p>
             </li>
         </ul>
     </li>
