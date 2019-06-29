@@ -3,12 +3,12 @@
     <form novalidate name="addBuildingForm" ngForm #addBuildingForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required  [(ngModel)]="building.name" name="name">
+        <input type="text" class="form-control" id="name" required  [(ngModel)]="building.name" name="name" autocomplete="off">
       </div>
  
       <div class="form-group">
         <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" required  [(ngModel)]="building.address" name="address">
+        <input type="text" class="form-control" id="address" required  [(ngModel)]="building.address" name="address" autocomplete="off">
       </div>
  
       <button type="submit" [disabled]="addBuildingForm.invalid" (click)="onSubmit()" class="btn btn-success">Add building</button>
